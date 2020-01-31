@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActualStatus index{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>ActualStatus index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actual_status in actual_statuses %}
+            <tr>
+                <td>{{ actual_status.id }}</td>
+                <td>{{ actual_status.name }}</td>
+                <td>
+                    <a href="{{ path('actual_status_show', {'id': actual_status.id}) }}">show</a>
+                    <a href="{{ path('actual_status_edit', {'id': actual_status.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('actual_status_new') }}">Create new</a>
+{% endblock %}

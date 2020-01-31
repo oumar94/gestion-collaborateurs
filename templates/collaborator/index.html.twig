@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collaborator index{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Gerer  les collaborateurs</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Date_dispo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for collaborator in collaborators %}
+            <tr>
+                <td>{{ collaborator.id }}</td>
+                <td>{{ collaborator.nom }}</td>
+                <td>{{ collaborator.prenom }}</td>
+                <td>{{ collaborator.dateDispo ? collaborator.dateDispo|date('d-m-Y') : '' }}</td>
+                <td>
+                    <a href="{{ path('collaborator_edit',{id:collaborator.id}) }}" class="btn btn-secondary">Editer</a>
+                    <form method="post" action="{{ path('collaborator_delete',{id:collaborator.id}) }}" style="display:inline-block" onsubmit="return confirm('etes vous sure de supprimer ce bien')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~collaborator.id) }}">
+                        <button class="btn btn-danger" >Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <div class="a.btn.btn-primary">
+            <a href="{{ path('collaborator_new') }}" class="btn btn-primary">Ajouter Collaborateur</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

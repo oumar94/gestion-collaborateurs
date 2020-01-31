@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer Collaborateur{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Editer le Collaborateur</h2>
+
+    {{ include('collaborator/_form.html.twig', {form: form, button: 'Editer'}) }}
+
+    <a href="{{ path('collaborator_index') }}">Retour à la liste </a>
+{% endblock %}

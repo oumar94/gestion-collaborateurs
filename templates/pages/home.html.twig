@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+<h1>les nouveaux collaborateurs </h1>
+    <div class="row flex">
+        {% for collaborator in collaborators %}
+            <div class="col-3">
+                <div class="card">
+
+                    {% if collaborator.filename %}
+                        <img src="{{ vich_uploader_asset(collaborator,'imageFile') |imagine_filter('thumb')}}" alt="card-img-top" style="width: 100%;height: 200px;">
+
+                    {% else %}
+                        <img src="{{ '/images/collaborators/profil_vide.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%;height: 200px;">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="#">{{ collaborator.nom }} {{ collaborator.prenom }}</a>
+                        </h5>
+                        {% for state in status %}
+                            {% if state.id is same as(collaborator.actualStatus.id) %}
+                            <p class="card-text"><span style="color: #222222;">Statut actuel: </span><span style="color:#007bff; ">{{ state.name }}</span></p>
+                            <div class="text-primary"><span style="color: #222222;">disponible le:</span> {{ collaborator.dateDispo ? collaborator.dateDispo|date('d-m-Y') : '' }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

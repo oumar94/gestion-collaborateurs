@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ActualStatus{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Create new ActualStatus</h1>
+
+    {{ include('actual_status/_form.html.twig') }}
+
+    <a href="{{ path('actual_status_index') }}">back to list</a>
+{% endblock %}
