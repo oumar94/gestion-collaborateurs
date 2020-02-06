@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OperatingMode{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Edit OperatingMode</h1>
+
+    {{ include('operating_mode/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('operating_mode_index') }}">back to list</a>
+
+    {{ include('operating_mode/_delete_form.html.twig') }}
+{% endblock %}

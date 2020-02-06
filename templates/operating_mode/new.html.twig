@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New OperatingMode{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Create new OperatingMode</h1>
+
+    {{ include('operating_mode/_form.html.twig') }}
+
+    <a href="{{ path('operating_mode_index') }}">back to list</a>
+{% endblock %}

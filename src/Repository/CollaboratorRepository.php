@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Collaborator;
+use App\Entity\CollaboratorSearch;
+use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Collaborator|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +22,77 @@ class CollaboratorRepository extends ServiceEntityRepository
         parent::__construct($registry, Collaborator::class);
     }
 
+   public  function  countTotal()
+   {
 
+       $qb = $this->createQueryBuilder('e');
+
+       $qb ->select($qb->expr()->count('e'));
+
+       return (int) $qb->getQuery()->getSingleScalarResult();
+   }
+    public  function  totalAT()
+    {
+
+        return  $this->createQueryBuilder('c')
+
+            ->andWhere('c.operating_mode=:test')
+            ->setParameter('test',1)
+        ->getQuery()
+        ->getResult();
+    }
+    public  function  totalForfait()
+    {
+
+        return  $this->createQueryBuilder('c')
+
+            ->andWhere('c.operating_mode=:test')
+            ->setParameter('test',2)
+            ->getQuery()
+            ->getResult();
+    }
     public function findLatest():array
     {
 
         return $this->findVisibleQuery()
 
             ->setMaxResults(4)
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
+
 
     }
-    public function findAllVisible():array
+    public function findAllVisible(CollaboratorSearch $search):Query
     {
-        return $this->findVisibleQuery()
-            ->getQuery()
-            ->getResult();
+        $query= $this->findVisibleQuery();
+        if($search->getActualStatus())
+        {
+            $taster=$search->getActualStatus();
+            $query=$query
+                ->andWhere('c.actualStatus=:taster')
+                ->setParameter('taster',$taster);
+
+        }
+        if($search->getOperatingMode())
+        {
+            $test=$search->getOperatingMode();
+            $query=$query
+                ->andWhere('c.operating_mode=:test')
+                ->setParameter('test',$test);
+
+        }
+
+        if($search->getClients()->count() > 0)
+        { $k=0;
+            foreach ($search->getClients() as $client)
+            {
+                $k++;
+                $query=$query
+                    ->andWhere(":client$k MEMBER OF c.clients")
+                    ->setParameter("client$k",$client);
+            }
+
+        }
+        return $query->getQuery();
 
     }
     // /**
@@ -68,7 +126,7 @@ class CollaboratorRepository extends ServiceEntityRepository
     private function findVisibleQuery()
     {
         return $this->createQueryBuilder('c')
-            //->where('c.sold = false')
+           /* ->where('c.id > 0')*/
             ->orderBy('c.id','desc')
             ;
     }

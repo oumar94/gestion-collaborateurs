@@ -16,6 +16,8 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
+                <th>Statut actuel</th>
+                <th>Mode de travail</th>
                 <th>Date_dispo</th>
                 <th>actions</th>
             </tr>
@@ -26,6 +28,19 @@
                 <td>{{ collaborator.id }}</td>
                 <td>{{ collaborator.nom }}</td>
                 <td>{{ collaborator.prenom }}</td>
+                {% for state in status %}
+                    {% if state.id is same as(collaborator.actualStatus.id) %}
+                        <td>{{ state.name }}</td>
+
+                    {% endif %}
+                {% endfor %}
+                {% for mode in modes %}
+                    {% if collaborator.operatingMode is not null %}
+                        {% if mode.id is same as(collaborator.operatingMode.id) %}
+                        <td>{{ mode.name }}</td>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
                 <td>{{ collaborator.dateDispo ? collaborator.dateDispo|date('d-m-Y') : '' }}</td>
                 <td>
                     <a href="{{ path('collaborator_edit',{id:collaborator.id}) }}" class="btn btn-secondary">Editer</a>
@@ -40,7 +55,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <div class="pagination">
+        {{ knp_pagination_render(collaborators) }}
+    </div>
     <div class="text-right">
         <div class="a.btn.btn-primary">
             <a href="{{ path('collaborator_new') }}" class="btn btn-primary">Ajouter Collaborateur</a>

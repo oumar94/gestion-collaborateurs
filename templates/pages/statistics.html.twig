@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container mt-4">
+    <h2>Dashboard et Statistiques</h2>
+<table class="table table-stripped"  style="border-top: none;">
+    <tr>
+        <td>Total plateaux(PMO inclus)</td>
+        <td>{{ totalTray }} </td>
+    </tr>
+    <tr>
+        <td>Total ETP Cdiscount</td>
+        <td>{{ totalTray }} </td>
+    </tr>
+    <tr>
+        <td>Total Demissionnaire totalResigned </td>
+
+        <td>{{ totalAT|length }} </td>
+    </tr>
+
+    <tr >
+        <td>Total P2F totalP2f</td>
+        <td>{{ totalTray }} </td>
+    </tr>
+    <tr>
+        <td>Total AT </td>
+        <td>{{ totalAT|length }} </td>
+    </tr>
+    <tr>
+        <td>Total Forfait totalForfait</td>
+
+        <td>{{ totalForfait|length }} </td>
+    </tr>
+    <tr>
+        <td>Total Stagiaire totalTrainees</td>
+        <td>{{ totalTray }} </td>
+    </tr>
+    <tr>
+        <td>Total PMO toatalPmo</td>
+
+        <td>{{ totalTray }} </td>
+    </tr>
+</table>
+
+</div>
+{% endblock %}

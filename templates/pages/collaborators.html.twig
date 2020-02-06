@@ -1,7 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="jumbotron">
     <div class="container">
-        <h1>tous les  collaborateurs </h1>
+        {{ form_start(form) }}
+        <div class="form-row align-items-end">
+
+            <div class="col">
+                {{ form_row(form.actualStatus) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.operating_mode) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.clients) }}
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <button class="btn btn-primary">Rechercher</button>
+                </div>
+
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="container">
+        <h1>tous les  collaborateurs({{ collaborators|length }}) </h1>
         <div class="row">
             {% for collaborator in collaborators %}
                 <div class="col-md-3">

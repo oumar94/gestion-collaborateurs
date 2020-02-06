@@ -6,10 +6,12 @@
 
 </div>
 <div class="row">
+    <div class="col-md-4">{{ form_row(form.date_affectation) }}</div>
     <div class="col-md-4">{{ form_row(form.date_dispo) }}</div>
-    <div class="col-md-4">{{ form_row(form.date_depart_prevue) }}</div>
 </div>
 <div class="row">
+    <div class="col-md-3">{{ form_row(form.date_depart_prevue) }}</div>
+    <div class="col-md-3">{{ form_row(form.remplacant_prevu) }}</div>
     <div class="col-md-2">{{ form_row(form.imageFile) }}</div>
 </div>
 {{ form_rest(form) }}

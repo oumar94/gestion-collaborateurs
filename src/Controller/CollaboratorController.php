@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Collaborator;
 use App\Form\CollaboratorType;
+use App\Repository\ActualStatusRepository;
 use App\Repository\CollaboratorRepository;
+use App\Repository\OperatingModeRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +18,26 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CollaboratorController extends AbstractController
 {
+    private $statusRepository;
+    private  $modeRepository;
+    public function __construct(ActualStatusRepository $statusRepository,OperatingModeRepository $modeRepository)
+    {
+        $this->statusRepository=$statusRepository;
+        $this->modeRepository=$modeRepository;
+    }
+
     /**
      * @Route("/admin", name="collaborator_index", methods={"GET"})
      */
-    public function index(CollaboratorRepository $collaboratorRepository): Response
+    public function index(CollaboratorRepository $collaboratorRepository,PaginatorInterface $paginator,Request $request): Response
     {
+        $collaborators=$paginator->paginate($collaboratorRepository->findAll(), $request->query->getInt('page', 1),6);
+        $status=$this->statusRepository->findStatus();
+        $modes=$this->modeRepository->findModes();
         return $this->render('collaborator/index.html.twig', [
-            'collaborators' => $collaboratorRepository->findAll(),
+            'collaborators' => $collaborators,
+            'status'=>$status,
+            'modes'=>$modes
         ]);
     }
 

@@ -66,6 +66,21 @@ class Collaborator
      */
     private $clients;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date_affectation;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $remplacant_prevu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\OperatingMode", inversedBy="collaborators")
+     */
+    private $operating_mode;
+
     public function __construct()
     {
         $this->clients = new ArrayCollection();
@@ -192,6 +207,42 @@ class Collaborator
             $this->clients->removeElement($client);
             $client->removeCollaborator($this);
         }
+
+        return $this;
+    }
+
+    public function getDateAffectation(): ?\DateTimeInterface
+    {
+        return $this->date_affectation;
+    }
+
+    public function setDateAffectation(\DateTimeInterface $date_affectation): self
+    {
+        $this->date_affectation = $date_affectation;
+
+        return $this;
+    }
+
+    public function getRemplacantPrevu(): ?string
+    {
+        return $this->remplacant_prevu;
+    }
+
+    public function setRemplacantPrevu(?string $remplacant_prevu): self
+    {
+        $this->remplacant_prevu = $remplacant_prevu;
+
+        return $this;
+    }
+
+    public function getOperatingMode(): ?OperatingMode
+    {
+        return $this->operating_mode;
+    }
+
+    public function setOperatingMode(?OperatingMode $operating_mode): self
+    {
+        $this->operating_mode = $operating_mode;
 
         return $this;
     }

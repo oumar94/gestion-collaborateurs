@@ -2,6 +2,8 @@
 
 namespace  App\Controller;
 
+use App\Entity\CollaboratorSearch;
+use App\Form\CollaboratorSearchType;
 use App\Repository\ActualStatusRepository;
 use App\Repository\CollaboratorRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -45,12 +47,35 @@ class HomeController extends  AbstractController
      */
     public function listAll(PaginatorInterface $paginator,Request $request,ActualStatusRepository $statusRepository): Response
     {
-
-        $collaborators=$paginator->paginate($this->repository->findAllVisible(), $request->query->getInt('page', 1),8);
+        $search=new CollaboratorSearch();
+        $form= $this->createForm(CollaboratorSearchType::class,$search);
+        $form->handleRequest($request);
+        $collaborators=$paginator->paginate($this->repository->findAllVisible($search), $request->query->getInt('page', 1),30);
         $status=$statusRepository->findStatus();
         return $this->render('pages/collaborators.html.twig', [
             'collaborators' => $collaborators,
-            'status'=>$status
+            'status'=>$status,
+            'form'=>$form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/statistics", name="collaborator_statistics", methods={"GET"})
+     * @param CollaboratorRepository $collaboratorRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    public function statistic(PaginatorInterface $paginator,Request $request,ActualStatusRepository $statusRepository): Response
+    {
+        $totalTray=$this->repository->countTotal();
+        $totalAT=$this->repository->totalAT();
+        $totalForfait=$this->repository->totalForfait();
+        return $this->render('pages/statistics.html.twig',[
+
+            'totalTray'=>$totalTray,
+            'totalAT'=>$totalAT,
+            'totalForfait'=>$totalForfait
         ]);
     }
 }
