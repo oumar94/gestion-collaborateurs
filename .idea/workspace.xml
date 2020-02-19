@@ -2,30 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a100d2b-e5f4-4c91-abea-d82ea0ce851b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/CollaboratorSearch.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/CollaboratorSearchType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pages/statistics.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/collaborators/5e343f5169ee0797994092.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/collaborators/5e344359de38a377103417.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CollaboratorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CollaboratorController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Collaborator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Collaborator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ClientType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ClientType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CollaboratorType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CollaboratorType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200131164513.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200131170952.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/CollaboratorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CollaboratorRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/collaborator/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/collaborator/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/collaborator/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/collaborator/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/collaborators.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/collaborators.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/statistics.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/statistics.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +152,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/collaborators" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../react-symfo-app" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -205,7 +186,15 @@
       <option name="presentableId" value="Default" />
       <updated>1580396499619</updated>
       <workItem from="1580396501108" duration="38247000" />
-      <workItem from="1580718242099" duration="52242000" />
+      <workItem from="1580718242099" duration="54548000" />
+      <workItem from="1581323612205" duration="41511000" />
+      <workItem from="1581927109546" duration="522000" />
+      <workItem from="1581927909137" duration="247000" />
+      <workItem from="1581934699423" duration="1699000" />
+      <workItem from="1582025834774" duration="92000" />
+      <workItem from="1582025975036" duration="83000" />
+      <workItem from="1582026122065" duration="394000" />
+      <workItem from="1582043015726" duration="55000" />
     </task>
     <servers />
   </component>
@@ -213,6 +202,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581331252844">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860/-1600.136.1600.860@0.0.1600.860" timestamp="1581331252844" />
     <state x="541" y="233" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580737757080">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -225,10 +218,14 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="530" y="201" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860/-1600.136.1600.860@0.0.1600.860" timestamp="1580749818311" />
-    <state x="495" y="254" key="com.intellij.ide.util.TipDialog" timestamp="1580718242254">
+    <state x="580" y="185" key="FileChooserDialogImpl" timestamp="1582043068074">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="495" y="254" key="com.intellij.ide.util.TipDialog/0.0.1600.860/-1600.136.1600.860@0.0.1600.860" timestamp="1580718242254" />
+    <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860/-1600.136.1600.860@0.0.1600.860" timestamp="1582043068074" />
+    <state x="495" y="254" key="com.intellij.ide.util.TipDialog" timestamp="1582043018910">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="495" y="254" key="com.intellij.ide.util.TipDialog/0.0.1600.860/-1600.136.1600.860@0.0.1600.860" timestamp="1582043018910" />
     <state x="497" y="178" width="606" height="536" key="find.popup" timestamp="1580466285143">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

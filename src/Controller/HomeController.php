@@ -18,12 +18,17 @@ class HomeController extends  AbstractController
 {
 
     /**
-     * @var PropertyRepository
+     * @var CollaboratorRepository
      */
     private $repository;
-    public function __construct(CollaboratorRepository $repository)
+    /**
+     * @var ActualStatusRepository
+     */
+    private $statusRepository;
+    public function __construct(CollaboratorRepository $repository,ActualStatusRepository $statusRepository)
     {
         $this->repository=$repository;
+        $this->statusRepository= $statusRepository;
     }
 
     /**
@@ -45,13 +50,13 @@ class HomeController extends  AbstractController
      * @param Request $request
      * @return Response
      */
-    public function listAll(PaginatorInterface $paginator,Request $request,ActualStatusRepository $statusRepository): Response
+    public function listAll(PaginatorInterface $paginator,Request $request): Response
     {
         $search=new CollaboratorSearch();
         $form= $this->createForm(CollaboratorSearchType::class,$search);
         $form->handleRequest($request);
         $collaborators=$paginator->paginate($this->repository->findAllVisible($search), $request->query->getInt('page', 1),30);
-        $status=$statusRepository->findStatus();
+        $status=$this->statusRepository->findStatus();
         return $this->render('pages/collaborators.html.twig', [
             'collaborators' => $collaborators,
             'status'=>$status,
@@ -66,16 +71,20 @@ class HomeController extends  AbstractController
      * @param Request $request
      * @return Response
      */
-    public function statistic(PaginatorInterface $paginator,Request $request,ActualStatusRepository $statusRepository): Response
+    public function statistic(): Response
     {
         $totalTray=$this->repository->countTotal();
+        $status=$this->statusRepository->findStatus();
+        $totalByStatus=$this->repository->totalByStatus();
+
         $totalAT=$this->repository->totalAT();
         $totalForfait=$this->repository->totalForfait();
         return $this->render('pages/statistics.html.twig',[
 
             'totalTray'=>$totalTray,
             'totalAT'=>$totalAT,
-            'totalForfait'=>$totalForfait
+            'totalForfait'=>$totalForfait,
+            'totalByStatus'=>$totalByStatus
         ]);
     }
 }

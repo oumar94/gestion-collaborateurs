@@ -6,8 +6,10 @@ use App\Entity\Collaborator;
 use App\Entity\CollaboratorSearch;
 use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * @method Collaborator|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,9 +19,11 @@ use Doctrine\ORM\Query;
  */
 class CollaboratorRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $statusRepository;
+    public function __construct(ManagerRegistry $registry,ActualStatusRepository $statusRepository)
     {
         parent::__construct($registry, Collaborator::class);
+         $this->statusRepository=$statusRepository;
     }
 
    public  function  countTotal()
@@ -31,6 +35,15 @@ class CollaboratorRepository extends ServiceEntityRepository
 
        return (int) $qb->getQuery()->getSingleScalarResult();
    }
+    public  function  countTotalStatus()
+    {
+
+        $qb = $this->statusRepository->createQueryBuilder('e');
+
+        $qb ->select($qb->expr()->count('e'));
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
     public  function  totalAT()
     {
 
@@ -41,6 +54,7 @@ class CollaboratorRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+
     public  function  totalForfait()
     {
 
@@ -51,13 +65,37 @@ class CollaboratorRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public  function  totalByStatus()
+    {
+        $tot=1;
+        $statusList=array();
+        for($i=1;$i < ($this->countTotalStatus())+1;$i++)
+        {
+           /* $statusName = $this->statusRepository->createQueryBuilder('s')
+                ->addSelect('s.name')
+                ->andwhere('s.id =:idd')
+                ->setParameter('idd', 1)
+                ->getQuery()
+                ->getResult();*/
+
+            $test = $this->createQueryBuilder('c')
+                ->andWhere('c.actualStatus=:test')
+                ->setParameter('test', $i);
+            $tot= (int)count($test->getQuery()->getResult());
+          $statusList[$i]=$tot;
+
+        }
+        return $statusList;
+    }
+
     public function findLatest():array
     {
 
         return $this->findVisibleQuery()
 
             ->setMaxResults(4)
-            ->getQuery();
+            ->getQuery()
+            ->getResult();;
 
 
     }

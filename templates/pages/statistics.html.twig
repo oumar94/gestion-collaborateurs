@@ -2,7 +2,7 @@
 {% block body %}
 <div class="container mt-4">
     <h2>Dashboard et Statistiques</h2>
-<table class="table table-stripped"  style="border-top: none;">
+<!--<table class="table table-stripped"  style="border-top: none;">
     <tr>
         <td>Total plateaux(PMO inclus)</td>
         <td>{{ totalTray }} </td>
@@ -39,7 +39,93 @@
 
         <td>{{ totalTray }} </td>
     </tr>
-</table>
+</table>-->
 
 </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+        </div>
+        <div class="col-md-5">
+            <div id="mode_piechart_3d" style="width: 900px; height: 500px;"></div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div id="client_piechart_3d" style="width: 900px; height: 500px;"></div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+            let data = google.visualization.arrayToDataTable([
+                ['Task', 'Nombre collab en fonction du statut'],
+                ['P2F',{{ totalByStatus.1 }}],
+                ['PMO', {{ totalByStatus.2 }}],
+                ['Stagiaire',{{ totalByStatus.3 }}],
+
+                ['Demissionnaire',{{ totalByStatus.5 }}],
+                ['Mobilité',  {{ totalByStatus.6 }}]
+
+            ]);
+
+            let options = {
+                title: 'Statuts des collaborateurs',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Nombre collab en fonction du mode de travail'],
+                ['AT',     {{ totalAT|length }}],
+                ['Forfiait',      {{ totalForfait|length }}]
+            ]);
+
+            var options = {
+                title: 'Mode de travail des collaborateurs',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('mode_piechart_3d'));
+            chart.draw(data, options);
+        }
+    </script>
+    <!--<script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Les projets-clients des collaborateurs'],
+                ['Cdiscount', 20],
+                ['AKKA Toulouse', 4],
+                ['Nokia',  4],
+                ['Akka I&S Maroc', 10],
+            ]);
+
+            var options = {
+                title: 'Les projets-clients des collaborateurs',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('client_piechart_3d'));
+            chart.draw(data, options);
+        }
+    </script>-->
+
 {% endblock %}
